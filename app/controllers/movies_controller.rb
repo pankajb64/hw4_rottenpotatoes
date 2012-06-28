@@ -59,7 +59,7 @@ class MoviesController < ApplicationController
   end
   
   def similar_director
-    Movie.movies_with_similar_director(Movie.find_by_id(params[:id]).director)
+    @movies = Movie.movies_with_similar_director(params[:id])
   end
 
 end
