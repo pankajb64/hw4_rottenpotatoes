@@ -7,6 +7,7 @@ class MoviesController < ApplicationController
   end
 
   def index
+    flash.keep
     sort = params[:sort] || session[:sort]
     case sort
     when 'title'
@@ -60,6 +61,13 @@ class MoviesController < ApplicationController
   
   def similar_director
     @movies = Movie.movies_with_similar_director(params[:id])
+    
+    if @movies == nil or @movies.empty?
+      movie = Movie.find_by_id(params[:id])
+      flash[:notice] = "'#{movie.title}' has no director info"
+      redirect_to movies_path
+    end
+
   end
 
 end

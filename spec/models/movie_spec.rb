@@ -17,7 +17,7 @@ describe Movie do
     @m1 = Movie.create(:director => 'Rohit Shetty')
     @m2 = Movie.create(:director => 'Rohit Shetty')
     @fake_movies = [ @movie, @m1, @m2 ]
-    Movie.stub(:find_all_by_director).and_return(@fake_movies)
+    #Movie.stub(:find_all_by_director).and_return(@fake_movies)
   end
     
   describe "find movies with similar director" do
@@ -33,6 +33,7 @@ describe Movie do
     end
     
     it 'should return all movies except the supplied movie' do
+      #Movie.stub(:find_all_by_director).and_return(@fake_movies)
       @fake_movies.delete(@movie) 
       Movie.movies_with_similar_director(@movie.id).should == @fake_movies
     end  
